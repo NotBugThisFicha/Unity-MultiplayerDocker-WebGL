@@ -1,0 +1,22 @@
+version: '3.3'
+
+services:
+  serverwebgl:
+    container_name: unity-webgl-server
+    image: unity-webgl-server
+    build: 
+      context: .
+      dockerfile: server-d.Dockerfile
+    ports:
+      - "7777:7777"
+  clientwebgl:
+    container_name: unity-webgl-demo
+    image: unity-webgl-demo
+    depends_on: 
+      - serverwebgl
+    build: 
+      context: .
+      dockerfile: client-d.Dockerfile
+    ports:
+      - "8080:80"
+    
